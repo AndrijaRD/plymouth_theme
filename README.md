@@ -21,4 +21,13 @@ To setup this theme place the files into `/usr/share/plymouth/themes/script` and
  - In the HOOKS line add `plymouth` (after the base udev)
  - Save and exit the file
  - Open grub fiile `nano /etc/default/grub`
- - 
+ - In the GRUB_CMDLINE_LINUX_DEFAULT add `splash udev.log_priority=3 vt.global_cursor_default=1` after the `loglevel=3 quiet`
+ - Save and exit the file
+ - Reconfigure mk initcpio: `sudo mkinitcpio -P linux`
+ - Then regenerate grub config on all locations using `sudo grub-mkconfig -o <path>`, path is usually `/boot/grub/grub.cfg` and `/boot/ufi/EFI/arch/grub.cfg`
+   (So the command would need to runned twice, also the exact path may be different but it follows the simular pattern as the example)
+ - After that plymouth is ready now just set the prefered theme.
+ - To view available themes run `sudo plymouth-set-default-theme -l`
+ - To set a theme run `sudo plymouth-set-default-theme -R <theme>`
+
+*All of the theme files can be found in `/usr/share/plymouth/themes`*
